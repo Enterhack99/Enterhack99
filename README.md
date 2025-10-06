@@ -1,22 +1,14 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+Nebo-clone - Render-ready repository
 
-TOKEN = '7106508635:AAFeWRTZlm5ngxVvASc9v89YZfVd2PPn6Lg'
+Instructions:
+1) Push this repository to GitHub.
+2) On Render create a new Web Service and connect the repo.
+   - Build command: npm install
+   - Start command: npm start
+3) Set environment variables on Render (recommended):
+   - ADMIN_USER (optional)
+   - ADMIN_PASS (optional)
+   - JWT_SECRET (recommended)
 
-def start(update, context):
-    update.message.reply_text("Привет! Я бот, который готов работать и помочь вам начать зарабатывать на Notcoin.")
-
-def echo(update, context):
-    update.message.reply_text(update.message.text)
-
-def main():
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
-
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
+The postinstall script builds the React client so the server will serve static files from client/build.
+Admin default: admin / ChangeMe123!
